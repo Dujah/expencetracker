@@ -11,10 +11,11 @@ const userSchema = new mongoose.Schema({
         unique:true
     },
     phone:{
-        type:Int16Array,
+        type:String,
     },
     password:{
         type: String,
     required: true
     }
 });
+module.exports = mongoose.model("User", userSchema);
