@@ -1,16 +1,25 @@
 const express=require('express')
 const dotenv=require('dotenv')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
 const registerroute=require('./route/register.js')
+const loginuser=require('./route/login.js')
 const app = express()
 const connectdb=require('./db/connect.js')
 
 app.use(express.json())
+app.use(cookieParser()) // this reads the incoming cookie from the client
 
 dotenv.config({
     path:"./.env",
 })
+app.use(cors({
+    origin: 'http://localhost:5000',   
+    credentials: true                
+}))
 
 app.use('/register',registerroute)
+app.use('/login',loginuser)
 
 connectdb()
   .then(()=>{
