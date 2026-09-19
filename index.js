@@ -1,5 +1,6 @@
 const express=require('express')
 const dotenv=require('dotenv')
+const verify=require('./middleware/aunthetic.js')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const registerroute=require('./route/register.js')
@@ -20,8 +21,9 @@ app.use(cors({
 
 app.use('/register',registerroute)
 app.use('/login',loginuser)
+app.use('/expense',verify)
 
-connectdb()
+connectdb() 
   .then(()=>{
     app.listen(5000, () => {
    console.log(`Example app listening on port 5000`)
